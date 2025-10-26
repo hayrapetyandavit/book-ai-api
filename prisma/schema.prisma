@@ -38,12 +38,12 @@ model User {
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
 
-  preferences   Preferences?
-  suggestions   SuggestedBook[]
+  preferences   UserPreferences?
+  // suggestions   SuggestedBook[]
   // jobs          SuggestionJob[]
 }
 
-model Preferences {
+model UserPreferences {
   id                 Int      @id @default(autoincrement())
   userId             Int      @unique
   genres             String[] 

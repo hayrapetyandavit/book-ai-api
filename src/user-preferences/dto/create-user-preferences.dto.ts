@@ -8,7 +8,7 @@ import {
   Min,
 } from 'class-validator';
 
-export class CreatePreferenceDto {
+export class CreateUserPreferenceDto {
   @IsString()
   userId: number;
 
