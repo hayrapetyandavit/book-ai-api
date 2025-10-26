@@ -7,12 +7,15 @@ import {
   Param,
   Delete,
   UseGuards,
+  ClassSerializerInterceptor,
+  UseInterceptors,
 } from '@nestjs/common';
 import { PreferencesService } from './preferences.service';
 import { CreatePreferenceDto } from './dto/create-preference.dto';
 import { UpdatePreferenceDto } from './dto/update-preference.dto';
-import { GoogleAuthGuard, JwtAuthGuard } from 'src/auth/utils/Guards';
+import { JwtAuthGuard } from 'src/auth/utils/Guards';
 import { ConfigService } from '@nestjs/config';
+import { PreferenceDto } from './dto/preference.dto';
 
 @Controller('preferences')
 export class PreferencesController {
@@ -31,10 +34,13 @@ export class PreferencesController {
     return this.preferencesService.findAll();
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.preferencesService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    // serialization example
+    const preference = await this.preferencesService.findOne(+id);
+    return new PreferenceDto(preference);
   }
 
   @Patch(':id')
