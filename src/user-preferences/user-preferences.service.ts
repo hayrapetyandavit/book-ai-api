@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreatePreferenceDto } from './dto/create-preference.dto';
-import { UpdatePreferenceDto } from './dto/update-preference.dto';
+import { CreateUserPreferenceDto } from './dto/create-user-preferences.dto';
+import { UpdateUserPreferenceDto } from './dto/update-user-preferences.dto';
 
 @Injectable()
-export class PreferencesService {
+export class UserPreferencesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createPreferenceDto: CreatePreferenceDto) {
-    return this.prisma.preferences.create({ data: createPreferenceDto });
+  create(createUserPreferenceDto: CreateUserPreferenceDto) {
+    return this.prisma.preferences.create({ data: createUserPreferenceDto });
   }
 
   findAll() {
@@ -19,10 +19,10 @@ export class PreferencesService {
     return this.prisma.preferences.findUnique({ where: { id } });
   }
 
-  update(id: number, updatePreferenceDto: UpdatePreferenceDto) {
+  update(id: number, updateUserPreferenceDto: UpdateUserPreferenceDto) {
     return this.prisma.preferences.update({
       where: { id },
-      data: updatePreferenceDto,
+      data: updateUserPreferenceDto,
     });
   }
 
