@@ -8,25 +8,27 @@ export class UserPreferencesService {
   constructor(private prisma: PrismaService) {}
 
   create(createUserPreferenceDto: CreateUserPreferenceDto) {
-    return this.prisma.preferences.create({ data: createUserPreferenceDto });
+    return this.prisma.userPreferences.create({
+      data: createUserPreferenceDto,
+    });
   }
 
   findAll() {
-    return this.prisma.preferences.findMany();
+    return this.prisma.userPreferences.findMany();
   }
 
   findOne(id: number) {
-    return this.prisma.preferences.findUnique({ where: { id } });
+    return this.prisma.userPreferences.findUnique({ where: { id } });
   }
 
   update(id: number, updateUserPreferenceDto: UpdateUserPreferenceDto) {
-    return this.prisma.preferences.update({
+    return this.prisma.userPreferences.update({
       where: { id },
       data: updateUserPreferenceDto,
     });
   }
 
   remove(id: number) {
-    return this.prisma.preferences.delete({ where: { id } });
+    return this.prisma.userPreferences.delete({ where: { id } });
   }
 }
