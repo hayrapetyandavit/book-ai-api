@@ -1,14 +1,14 @@
 import { Exclude, Expose } from 'class-transformer';
 
 @Exclude()
-export class PreferenceDto {
-  @Expose() // include in output
+export class UserPreferenceDto {
+  @Expose()
   id: number;
 
   @Expose()
   genres: string[];
 
-  constructor(partial: Partial<PreferenceDto>) {
+  constructor(partial: Partial<UserPreferenceDto>) {
     Object.assign(this, partial);
   }
 }
