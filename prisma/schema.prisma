@@ -39,7 +39,7 @@ model User {
   updatedAt     DateTime         @updatedAt
 
   preferences   UserPreferences?
-  // suggestions   SuggestedBook[]
+  suggestions   BookSuggestion[]
   // jobs          SuggestionJob[]
 }
 

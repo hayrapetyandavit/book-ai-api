@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { BookSuggestionService } from './book-suggestion.service';
 import { CreateBookSuggestionDto } from './dto/create-book-suggestion.dto';
 import { UpdateBookSuggestionDto } from './dto/update-book-suggestion.dto';
@@ -23,12 +23,10 @@ export class BookSuggestionController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBookSuggestionDto: UpdateBookSuggestionDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateBookSuggestionDto: UpdateBookSuggestionDto,
+  ) {
     return this.bookSuggestionService.update(+id, updateBookSuggestionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bookSuggestionService.remove(+id);
   }
 }
