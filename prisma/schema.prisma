@@ -20,6 +20,13 @@ enum BookLength {
   EPIC    // 700+ pages
 }
 
+enum SuggestionStatus {
+  PENDING
+  SEEN
+  ACCEPTED
+  REJECTED
+}
+
 model User {
   id            Int              @id @default(autoincrement())
   email         String           @unique
@@ -32,7 +39,7 @@ model User {
   updatedAt     DateTime         @updatedAt
 
   preferences   Preferences?
-  // suggestions   SuggestedBook[]
+  suggestions   SuggestedBook[]
   // jobs          SuggestionJob[]
 }
 
@@ -54,5 +61,15 @@ model Preferences {
   user        User     @relation(fields: [userId], references: [id])
 }
 
+model BookSuggestion {
+  id                  Int              @id @default(autoincrement())
+  userId              Int
+  title               String
+  author              String
+  length              BookLength?
+  suggestedAt         DateTime         @default(now())
+  status              SuggestionStatus @default(PENDING)
 
+  user                User @relation(fields: [userId], references: [id])
+}
 
