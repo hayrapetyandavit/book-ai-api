@@ -5,6 +5,7 @@ import { GoogleStrategy } from './utils/GoogleStrategy';
 import { PassportModule } from '@nestjs/passport';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { SessionSerializer } from './utils/Serializer';
+import { JwtStrategy } from './utils/JwtStrategy';
 
 @Module({
   imports: [PassportModule.register({ session: false }), PrismaModule],
@@ -16,6 +17,7 @@ import { SessionSerializer } from './utils/Serializer';
       useExisting: AuthService,
     },
     GoogleStrategy,
+    JwtStrategy,
     SessionSerializer,
   ],
 })

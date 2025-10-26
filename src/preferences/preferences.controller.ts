@@ -11,7 +11,7 @@ import {
 import { PreferencesService } from './preferences.service';
 import { CreatePreferenceDto } from './dto/create-preference.dto';
 import { UpdatePreferenceDto } from './dto/update-preference.dto';
-import { GoogleAuthGuard } from 'src/auth/utils/Guards';
+import { GoogleAuthGuard, JwtAuthGuard } from 'src/auth/utils/Guards';
 import { ConfigService } from '@nestjs/config';
 
 @Controller('preferences')
@@ -27,13 +27,12 @@ export class PreferencesController {
   }
 
   @Get()
-  // @UseGuards(GoogleAuthGuard)
   findAll() {
     return this.preferencesService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(GoogleAuthGuard)
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.preferencesService.findOne(+id);
   }

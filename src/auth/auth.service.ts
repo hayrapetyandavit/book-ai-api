@@ -6,7 +6,6 @@ export class AuthService {
   constructor(private prisma: PrismaService) {}
 
   async validateUser(email: string) {
-    console.log('Validating User:', email);
     const user = await this.prisma.user.findUnique({
       where: { email },
     });
