@@ -6,9 +6,24 @@ import { PassportModule } from '@nestjs/passport';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { SessionSerializer } from './utils/Serializer';
 import { JwtStrategy } from './utils/JwtStrategy';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [PassportModule.register({ session: false }), PrismaModule],
+  imports: [
+    PassportModule.register({ session: false }),
+    PrismaModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET') || 'default',
+        // signOptions: {
+        //   expiresIn: configService.get<string>('JWT_EXPIRES_IN') || '3600000',
+        // },
+      }),
+    }),
+  ],
   controllers: [AuthController],
   providers: [
     AuthService,
