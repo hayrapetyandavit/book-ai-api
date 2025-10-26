@@ -5,6 +5,11 @@ CREATE TYPE "BookLength" AS ENUM ('SHORT', 'MEDIUM', 'LONG', 'EPIC');
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
+    "googleId" TEXT NOT NULL,
+    "firstName" TEXT,
+    "lastName" TEXT,
+    "picture" TEXT,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -28,6 +33,9 @@ CREATE TABLE "Preferences" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_googleId_key" ON "User"("googleId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Preferences_userId_key" ON "Preferences"("userId");

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Profile } from 'passport';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -9,15 +10,18 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { email },
+  async validateUser(profile: Profile) {
+    return this.prisma.user.upsert({
+      where: { googleId: profile.id },
+      update: { picture: profile.photos[0].value },
+      create: {
+        email: profile.emails[0].value,
+        googleId: profile.id,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        picture: profile.photos[0].value,
+      },
     });
-    if (user) return user;
-    const newUser = await this.prisma.user.create({
-      data: { email },
-    });
-    return newUser;
   }
 
   async findUser(id: number) {
