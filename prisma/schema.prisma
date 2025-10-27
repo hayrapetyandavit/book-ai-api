@@ -49,7 +49,7 @@ model UserPreferences {
   genres             String[] 
   authors            String[]
 
-  preferredBookLength BookLength?
+  preferredBookLength BookLength? // TODO: just length
 
   suggestionFrequency Int
   suggestionCount     Int
