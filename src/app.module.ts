@@ -5,6 +5,7 @@ import { UserPreferencesModule } from './user-preferences/user-preferences.modul
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { BookSuggestionModule } from './book-suggestion/book-suggestion.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { BookSuggestionModule } from './book-suggestion/book-suggestion.module';
     UserPreferencesModule,
     AuthModule,
     BookSuggestionModule,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
